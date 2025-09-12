@@ -2,45 +2,64 @@ using System;
 
 namespace ConnectFour
 {
-    
+
     //6*7 grid and customized grid
     public class Board
     {
         public int Rows { get; }
         public int Cols { get; }
+        private char[,] grid;
 
-        
+
         public Board(int rows, int cols)
         {
             Rows = rows;
             Cols = cols;
-            
+            grid = new char[Rows, Cols];
+
+            //make the grid empty
+            for (int r = Rows - 1; r >= 0; r--)
+            {
+                for (int c = 0; c < Cols; c++)
+                {
+                    grid[r, c] = ' ';
+                }
+            }
+
         }
 
 
-        //customized grid
         public void Print()
         {
             Console.WriteLine();
             // rows=0 is bottom
-            for (int rows = 0; rows < Rows; rows--)
+            for (int r = Rows - 1; r >= 0; r--)
             {
-                Console.Write($"{row + 1,2} ");
-                for (int cols = 0; cols < Cols; cols++)
+                Console.Write((r + 1).ToString().PadLeft(2));
+                Console.Write(" ");
+
+                for (int c = 0; c < Cols; c++)
                 {
-                    char symbol = grid[rows, cols];
-                    if (symbol == " ")
+                    char symbol = grid[r, c];
+                    if (symbol == ' ')
                         Console.Write("|   ");
                     else
                         Console.Write("|  " + symbol + "  ");
+                }
+                Console.WriteLine("|");
 
             }
-            //The bottom grid
-            for (int c = 0; c < Cols; c++)
+            Console.Write("   ");
+            for (int c = 1; c <= Cols; c++)
             {
-                Console.Write("_________");
+                if (c < 10)
+                    Console.Write(" " + c + "  ");
+                else
+                    Console.Write(" " + c + " ");
             }
+
         }
+        
     }
-}
+};
 

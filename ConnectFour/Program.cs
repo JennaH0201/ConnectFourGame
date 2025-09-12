@@ -9,7 +9,7 @@ namespace ConnectFour
         {
             while (true)
             {
-                Console.WriteLine("Let's play Connect Four!\n");
+                Console.WriteLine("\n Let's play Connect Four!\n");
                 Console.WriteLine();
                 Console.WriteLine("1. New Game");
                 Console.WriteLine("2. Load Game");
