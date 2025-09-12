@@ -56,15 +56,14 @@ namespace ConnectFour
             {
                 Console.WriteLine("Starting a custom game!");
                 rows = PromptForInt("Enter the rows number *minimun 6: ", 6);
-                cols = PromptForInt("Enter the columns number *minimun 7: ", 7);
+                cols = rows + 1;
             }
 
             else
             //6*7 grid game
             {
                 Console.WriteLine("Starting a basic game!");
-                rows = 6;
-                cols = 7;
+                rows = 6; cols = 7;
             }
 
             var board = new Board(rows, cols);
