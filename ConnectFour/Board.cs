@@ -52,10 +52,10 @@ namespace ConnectFour
             Console.Write("   ");
             for (int c = 1; c <= Cols; c++)
             {
-                if (c < 10)
-                    Console.Write(" " + c + "  ");
+                if (c < 20)
+                    Console.Write("  " + c + "  ");
                 else
-                    Console.Write(" " + c + " ");
+                    Console.Write("  " + c + " ");
             }
 
         }
