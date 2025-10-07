@@ -59,16 +59,6 @@ Our framework supports multiple game variants and modes, showcasing:
 
 ---
 
-## 🚀 How to Run
-
-1. Ensure [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) is installed.
-2. Open terminal in the project folder.
-3. Run the following commands:
-
-```bash
-dotnet clean
-dotnet run
-```
 
 ## Project Configuration Files
 
