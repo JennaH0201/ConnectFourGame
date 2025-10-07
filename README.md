@@ -35,16 +35,16 @@ Welcome to **ConnectFour**, a modular and extensible implementation of the class
 
 ## 🧠 Design Patterns in Code
 
-This project applies several object-oriented design patterns to improve modularity, extensibility, and maintainability. The table below highlights where each pattern is implemented in the codebase:
+This project applies several object-oriented design patterns to improve modularity, extensibility, and maintainability. The table below highlights where each pattern is implemented in the codebase.
 
-| Design Pattern     | Purpose                                      | Implemented In / Example Class        | Description                                                                 |
-|--------------------|----------------------------------------------|----------------------------------------|------------------------------------------------------------------------------|
-| Template Method     | Define game flow with customizable steps     | `GameBase`, `PlayGame()`               | Base class defines game loop; subclasses override game-specific steps       |
-| Factory Method      | Create disc objects based on input           | `DiscFactory`, `CreateDiscFromSymbol()`| Returns correct disc type (Ordinary, Boring, Magnetic) based on symbol      |
-| Strategy            | Select AI move logic dynamically             | `IMoveStrategy`, `RandomStrategy`, `WinningMoveStrategy` | AI player uses strategy interface to choose moves                           |
-| Command             | Encapsulate undo/redo actions                | `ICommand`, `PlaceDiscCommand`, `UndoCommand`, `RedoCommand` | Each move is stored as a command; supports undo/redo stack                  |
-| Composite (optional)| Treat grid and cells uniformly               | `Grid`, `Cell`                         | Grid composed of cells; each cell holds a disc or is empty                  |
-| Observer (optional) | Notify UI or logger on state change          | `IGameObserver`, `ConsoleLogger`       | Observers update when game state changes (e.g. disc placed, game won)       |
+| Design Pattern     | Location in Code                          | Status | Description                                                                 |
+|--------------------|-------------------------------------------|--------|-----------------------------------------------------------------------------|
+| Template Method     | `GameBase.cs` – `PlayGame()` method       | ✅     | Base class defines game loop; subclasses override game-specific steps       |
+| Factory Method      | `DiscFactory.cs` – `CreateDiscFromSymbol()` | ✅     | Returns correct disc type (Ordinary, Boring, Magnetic) based on symbol      |
+| Strategy            | `IMoveStrategy.cs` – interface definition<br>`RandomStrategy.cs`, `WinningMoveStrategy.cs` | ✅     | AI player uses strategy interface to choose moves                           |
+| Command             | `ICommand.cs` – interface<br>`PlaceDiscCommand.cs`, `UndoCommand.cs`, `RedoCommand.cs` | ✅     | Each move is stored as a command; supports undo/redo stack                  |
+| Composite           | `Grid.cs` and `Cell.cs` – grid composed of cells | ❌     | Intended to treat grid and cells uniformly via shared interface             |
+| Observer            | `IGameObserver.cs`, `ConsoleLogger.cs`    | ❌     | Intended to notify observers on game state changes                          |
 
 
 ---
