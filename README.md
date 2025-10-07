@@ -43,19 +43,19 @@ Our framework supports multiple game variants and modes, showcasing:
 
 ## ✅ Assignment Requirements Checklist
 
-| Requirement                 | Status       | Notes                                                    |
-|-----------------------------|--------------|----------------------------------------------------------|
-| Human vs Human mode         | ✅ Implemented | Validates moves and handles turn logic                |
-| Human vs Computer mode      | ✅ Implemented | AI checks for winning move; else selects random move  |
-| LineUp Classic              | ✅ Implemented | Includes all disc types and win logic                 |
-| LineUp Basic                | ✅ Implemented | Ordinary discs only; fixed grid size                  |
-| LineUp Spin                 | ✅ Implemented | Grid rotates every 5 turns; gravity reapplied         |
-| Save and Restore            | ✅ Implemented | Game state saved to file and resumed accurately       |
-| Undo and Redo               | ✅ Implemented | Full move history tracked; redo available after undo  |
-| Help Menu                   | ✅ Implemented | Displays available commands and examples              |
-| Modular Class Design        | ✅ Implemented | Follows OOP principles and design patterns            |
-| Console Interface (.NET 8)  | ✅ Implemented | Text-based interface using ASCII/Unicode              |
-| Design Patterns Applied     | ✅ Documented  | Template Method, Factory Method, Strategy, Command    |
+| Requirement                 | Status| Notes                                                    |
+|-----------------------------|---------|----------------------------------------------------------|
+| Human vs Human mode         | ❌  | Validates moves and handles turn logic                |
+| Human vs Computer mode      | ❌  | AI checks for winning move; else selects random move  |
+| LineUp Classic              | ❌  | Includes all disc types and win logic                 |
+| LineUp Basic                | ❌  | Ordinary discs only; fixed grid size                  |
+| LineUp Spin                 | ❌  | Grid rotates every 5 turns; gravity reapplied         |
+| Save and Restore            | ❌  | Game state saved to file and resumed accurately       |
+| Undo and Redo               | ❌  | Full move history tracked; redo available after undo  |
+| Help Menu                   | ❌  | Displays available commands and examples              |
+| Modular Class Design        | ❌  | Follows OOP principles and design patterns            |
+| Console Interface (.NET 8)  | ❌  | Text-based interface using ASCII/Unicode              |
+| Design Patterns Applied     | ❌   | Template Method, Factory Method, Strategy, Command    |
 
 ---
 
