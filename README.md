@@ -2,7 +2,6 @@
 
 Welcome to **ConnectFour**, a modular and extensible implementation of the classic two-player strategy game — developed by Team 14 for **IFN584: Software Development** at QUT.
 
-This project demonstrates clean architecture, strategic object-oriented design, and robust gameplay mechanics, all delivered through a user-friendly C# console interface.
 
 ---
 
@@ -10,13 +9,6 @@ This project demonstrates clean architecture, strategic object-oriented design, 
 
 **ConnectFour** is a turn-based board game where players drop discs into a grid, aiming to connect four of their own symbols in a row — vertically, horizontally, or diagonally.
 
-Our framework supports multiple game variants and modes, showcasing:
-
-- Extensible architecture for future board games
-- Special disc types with unique effects
-- Human vs Human and Human vs Computer gameplay
-- Undo/Redo, Save/Restore, and Spin mechanics
-- Design pattern integration for maintainability and scalability
 
 ---
 
@@ -41,6 +33,21 @@ Our framework supports multiple game variants and modes, showcasing:
 
 ---
 
+## 🧠 Design Patterns in Code
+
+This project applies several object-oriented design patterns to improve modularity, extensibility, and maintainability. The table below highlights where each pattern is implemented in the codebase:
+
+| Design Pattern     | Purpose                                      | Implemented In / Example Class        | Description                                                                 |
+|--------------------|----------------------------------------------|----------------------------------------|------------------------------------------------------------------------------|
+| Template Method     | Define game flow with customizable steps     | `GameBase`, `PlayGame()`               | Base class defines game loop; subclasses override game-specific steps       |
+| Factory Method      | Create disc objects based on input           | `DiscFactory`, `CreateDiscFromSymbol()`| Returns correct disc type (Ordinary, Boring, Magnetic) based on symbol      |
+| Strategy            | Select AI move logic dynamically             | `IMoveStrategy`, `RandomStrategy`, `WinningMoveStrategy` | AI player uses strategy interface to choose moves                           |
+| Command             | Encapsulate undo/redo actions                | `ICommand`, `PlaceDiscCommand`, `UndoCommand`, `RedoCommand` | Each move is stored as a command; supports undo/redo stack                  |
+| Composite (optional)| Treat grid and cells uniformly               | `Grid`, `Cell`                         | Grid composed of cells; each cell holds a disc or is empty                  |
+| Observer (optional) | Notify UI or logger on state change          | `IGameObserver`, `ConsoleLogger`       | Observers update when game state changes (e.g. disc placed, game won)       |
+
+
+---
 ## ✅ Assignment Requirements Checklist
 
 | Requirement                 | Status| Notes                                                    |
