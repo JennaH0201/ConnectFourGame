@@ -21,3 +21,11 @@ ConnectFour is a two-player game where participants take turns dropping discs in
 
 | Feature                  | Description                                                                 |
 |--------------------------|-----------------------------------------------------------------------------
+
+
+## Team member
+Hamza Ateeq 
+Jaeeun Heo N1170519 
+Jennifer Ngo N1046724 
+Philip Njoroge N1217634 
+
