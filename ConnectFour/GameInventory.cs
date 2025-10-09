@@ -7,6 +7,7 @@ namespace ConnectFour
     public class GameInventory
     {
         public string GameMode { get; set; }
+        public string GameVariant { get; set; } // LineUp Classic, LineUp Basic, or LineUp Spin
         public int Rows { get; set; }
         public int Columns { get; set; }
         public string PlayerOneName { get; set; }
@@ -110,6 +111,7 @@ namespace ConnectFour
 
             Console.WriteLine("Game Summary:");
             Console.WriteLine($"Mode: {GameMode}");
+            Console.WriteLine($"Variant: {GameVariant}");
             Console.WriteLine($"Grid Size: {Rows} rows × {Columns} columns");
             Console.WriteLine($"Player 1: {PlayerOneName}");
             Console.WriteLine($"Player 2: {PlayerTwoName}");

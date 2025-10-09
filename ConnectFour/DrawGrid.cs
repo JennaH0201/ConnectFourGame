@@ -187,5 +187,134 @@ public class DrawGrid
         return false;
     }
 
-                
+    // Rotates the grid 90° clockwise
+    public void RotateGridClockwise()
+    {
+        int newRows = Columns;
+        int newCols = Rows;
+        Disc[,] rotatedGrid = new Disc[newRows, newCols];
+
+        // 90° clockwise rotation:
+        // Position [r,c] moves to [Columns-1-c, r]
+        for (int r = 0; r < Rows; r++)
+        {
+            for (int c = 0; c < Columns; c++)
+            {
+                // Map old position to new position after 90° clockwise rotation
+                int newRow = Columns - 1 - c;
+                int newCol = r;
+                rotatedGrid[newRow, newCol] = Grid[r, c];
+            }
+        }
+
+        // Update grid dimensions and reference
+        Grid = rotatedGrid;
+        Rows = newRows;
+        Columns = newCols;
+    }
+
+    // Reapplies gravity after rotation - all discs fall to the new bottom
+    public void ApplyGravity()
+    {
+        for (int col = 0; col < Columns; col++)
+        {
+            int writeRow = 0; // Position to place the next falling disc
+
+            // Collect all non-null discs in this column from bottom to top
+            for (int row = 0; row < Rows; row++)
+            {
+                if (Grid[row, col] != null)
+                {
+                    // If disc is not already at the write position, move it down
+                    if (row != writeRow)
+                    {
+                        Grid[writeRow, col] = Grid[row, col];
+                        Grid[row, col] = null;
+                    }
+                    writeRow++;
+                }
+            }
+        }
+    }
+
+    // Performs full rotation with gravity for LineUp Spin
+    public void PerformRotation(int moveCounter)
+    {
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        
+        Console.WriteLine("ROTATION TRIGGERED! (After every 5th move)");
+        Console.WriteLine("Grid rotating 90° clockwise...");
+       
+        Console.ResetColor();
+
+        Console.WriteLine("BEFORE ROTATION:");
+        DisplayGridWithoutClear(moveCounter);
+        Console.WriteLine("\nPress any key to see the rotation...");
+        Console.ReadKey();
+
+        RotateGridClockwise();
+        ApplyGravity();
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        
+        Console.WriteLine("ROTATION COMPLETE! Gravity reapplied.");
+        
+        Console.ResetColor();
+
+        Console.WriteLine("AFTER ROTATION:");
+        DisplayGridWithoutClear(moveCounter);
+        Console.WriteLine("\nPress any key to continue...");
+        Console.ReadKey();
+    }
+
+    // Helper method to display grid without clearing console
+    private void DisplayGridWithoutClear(int moveCounter)
+    {
+        Console.WriteLine();
+
+        string currentPlayer = moveCounter % 2 != 0 ? "Player 1" : "Player 2";
+        string symbol = currentPlayer == "Player 1" ? inventory.PlayerOneName : inventory.PlayerTwoName;
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"Move #{moveCounter} — {currentPlayer}'s turn ({symbol})");
+        Console.ResetColor();
+        Console.WriteLine();
+
+        for (int row = Rows - 1; row >= 0; row--)
+        {
+            Console.Write($"{row + 1,2} ");
+            for (int col = 0; col < Columns; col++)
+            {
+                Disc disc = Grid[row, col];
+                char cellSymbol;
+                if (disc != null)
+                {
+                    cellSymbol = disc.Symbol;
+                }
+                else
+                {
+                    cellSymbol = ' ';
+                }
+                Console.Write($"| {cellSymbol} ");
+            }
+            Console.WriteLine("|");
+        }
+
+        Console.Write("   ");
+        for (int col = 0; col < Columns; col++)
+        {
+            Console.Write($"  {col + 1} ");
+        }
+
+        Console.WriteLine(Environment.NewLine);
+
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("Disc Inventory:");
+        Console.WriteLine($"Player 1 ({inventory.PlayerOneName}) → Ordinary: {inventory.PlayerOneOrdinaryDiscs}, Boring: {inventory.PlayerOneBoringDiscs}, Magnetic: {inventory.PlayerOneMagneticDiscs}");
+        Console.WriteLine($"Player 2 ({inventory.PlayerTwoName}) → Ordinary: {inventory.PlayerTwoOrdinaryDiscs}, Boring: {inventory.PlayerTwoBoringDiscs}, Magnetic: {inventory.PlayerTwoMagneticDiscs}");
+        Console.ResetColor();
+
+        Console.WriteLine();
+    }
+
 }
