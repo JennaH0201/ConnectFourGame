@@ -102,6 +102,22 @@ namespace ConnectFour
                     }
                     else
                     {
+                        // Select game variant for new games
+                        Console.WriteLine(Environment.NewLine);
+                        Console.WriteLine("Select Game Variant:");
+                        Console.WriteLine("1. LineUp Classic");
+                        Console.WriteLine("2. LineUp Basic");
+                        Console.WriteLine("3. LineUp Spin (Grid rotates every 5 turns)");
+                        int variant = InputValidation.GetValidatedInteger("Enter your choice (1-3): ", 1, 3);
+
+                        gameInventory.GameVariant = variant switch
+                        {
+                            1 => "LineUp Classic",
+                            2 => "LineUp Basic",
+                            3 => "LineUp Spin",
+                            _ => "LineUp Basic"
+                        };
+
                         await RunGameLoop(gameInventory);
                     }
                 }
@@ -175,6 +191,17 @@ namespace ConnectFour
                         grid.Grid[dropRow, column] = disc;
                         disc.ApplyEffect(grid.Grid, dropRow, column, gameInventory);
                         gameInventory.moveCounter++;
+
+                        // Check if rotation should occur (every 5th turn for LineUp Spin)
+                        if (gameInventory.GameVariant == "LineUp Spin" && gameInventory.moveCounter % 5 == 1 && gameInventory.moveCounter > 1)
+                        {
+                            grid.PerformRotation(gameInventory.moveCounter);
+
+                            // Update GameInventory dimensions after rotation
+                            gameInventory.Rows = grid.Rows;
+                            gameInventory.Columns = grid.Columns;
+                        }
+
                         grid.DisplayGrid(gameInventory.moveCounter);
 
                         GameState currentState = new GameState(gameInventory, grid);
