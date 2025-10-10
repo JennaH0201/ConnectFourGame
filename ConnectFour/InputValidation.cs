@@ -51,6 +51,8 @@ namespace ConnectFour
                 (2, 'b') => 'b',
                 (1, 'm') => 'M',
                 (2, 'm') => 'm',
+                (1, 'e') => 'E',
+                (2, 'e') => 'e',
                 _ => throw new ArgumentException("Invalid disc type.")
             };
 

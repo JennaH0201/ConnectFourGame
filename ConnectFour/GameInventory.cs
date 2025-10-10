@@ -23,11 +23,13 @@ namespace ConnectFour
         [JsonInclude] public int PlayerOneOrdinaryDiscs { get; private set; }
         [JsonInclude] public int PlayerOneBoringDiscs { get; private set; } = 2;
         [JsonInclude] public int PlayerOneMagneticDiscs { get; private set; } = 2;
+        [JsonInclude] public int PlayerOneExplodeDiscs { get; private set; } = 2;
 
         // Player 2 disc counts
         [JsonInclude] public int PlayerTwoOrdinaryDiscs { get; private set; }
         [JsonInclude] public int PlayerTwoBoringDiscs { get; private set; } = 2;
         [JsonInclude] public int PlayerTwoMagneticDiscs { get; private set; } = 2;
+        [JsonInclude] public int PlayerTwoExplodeDiscs { get; private set; } = 2;
 
 
 
@@ -41,6 +43,8 @@ namespace ConnectFour
                 'b' => PlayerTwoBoringDiscs > 0,
                 'M' => PlayerOneMagneticDiscs > 0,
                 'm' => PlayerTwoMagneticDiscs > 0,
+                'E' => PlayerOneExplodeDiscs > 0,
+                'e' => PlayerTwoExplodeDiscs > 0,
                 _ => false
             };
         }
@@ -87,6 +91,19 @@ namespace ConnectFour
                     }
                     break;
 
+                case "explode":
+                    if (isPlayerOne && PlayerOneExplodeDiscs > 0)
+                    {
+                        PlayerOneExplodeDiscs--;
+                        return true;
+                    }
+                    else if (!isPlayerOne && PlayerTwoExplodeDiscs > 0)
+                    {
+                        PlayerTwoExplodeDiscs--;
+                        return true;
+                    }
+                    break;
+
                 case "magnetic":
                     if (isPlayerOne && PlayerOneMagneticDiscs > 0)
                     {
@@ -124,8 +141,8 @@ namespace ConnectFour
             Console.ForegroundColor = ConsoleColor.Cyan;
 
             Console.WriteLine($"Each player receives {DiscsPerPlayer} discs:");
-            Console.WriteLine($"Player 1 → Ordinary: {PlayerOneOrdinaryDiscs}, Boring: {PlayerOneBoringDiscs}, Magnetic: {PlayerOneMagneticDiscs}");
-            Console.WriteLine($"Player 2 → Ordinary: {PlayerTwoOrdinaryDiscs}, Boring: {PlayerTwoBoringDiscs}, Magnetic: {PlayerTwoMagneticDiscs}");
+            Console.WriteLine($"Player 1 → Ordinary: {PlayerOneOrdinaryDiscs}, Boring: {PlayerOneBoringDiscs}, Magnetic: {PlayerOneMagneticDiscs}, Magnetic: {PlayerOneExplodeDiscs}");
+            Console.WriteLine($"Player 2 → Ordinary: {PlayerTwoOrdinaryDiscs}, Boring: {PlayerTwoBoringDiscs}, Magnetic: {PlayerTwoMagneticDiscs}, Magnetic: {PlayerTwoExplodeDiscs}");
             Console.WriteLine();
 
             Console.ResetColor();
