@@ -32,6 +32,8 @@ namespace ConnectFour
                 'b' => new DiscBoring('b'),
                 'M' => new DiscMagnetic('M'),
                 'm' => new DiscMagnetic('m'),
+                'E' => new DiscExplode('E'),
+                'e' => new DiscExplode('e'),
                 _ => throw new ArgumentException("Invalid disc symbol.")
             };
         }
@@ -46,6 +48,8 @@ namespace ConnectFour
                 'b' => "Boring",
                 'M' => "Magnetic",
                 'm' => "Magnetic",
+                'E' => "Explode",
+                'e' => "Explode",
                 _ => throw new ArgumentException("Invalid disc symbol.")
             };
         }
