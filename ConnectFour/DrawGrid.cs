@@ -59,7 +59,7 @@ public class DrawGrid
         string discType = Disc.GetDiscTypeFromSymbol(symbol);
         inventory.UseDisc(inventory.moveCounter, discType);
 
-        //Applying effects for Magnetic and Boring Discs. implements in their respective classes using polymorfism
+        //Applying effects for Magnetic, Exploding and Boring Discs. implements in their respective classes using polymorfism
         Grid[dropRow, column] = disc;
         disc.ApplyEffect(Grid, dropRow, column, inventory);
 
@@ -110,8 +110,8 @@ public class DrawGrid
 
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("Disc Inventory:");
-        Console.WriteLine($"Player 1 ({inventory.PlayerOneName}) → Ordinary: {inventory.PlayerOneOrdinaryDiscs}, Boring: {inventory.PlayerOneBoringDiscs}, Magnetic: {inventory.PlayerOneMagneticDiscs}");
-        Console.WriteLine($"Player 2 ({inventory.PlayerTwoName}) → Ordinary: {inventory.PlayerTwoOrdinaryDiscs}, Boring: {inventory.PlayerTwoBoringDiscs}, Magnetic: {inventory.PlayerTwoMagneticDiscs}");
+        Console.WriteLine($"Player 1 ({inventory.PlayerOneName}) → Ordinary: {inventory.PlayerOneOrdinaryDiscs}, Boring: {inventory.PlayerOneBoringDiscs}, Magnetic: {inventory.PlayerOneMagneticDiscs}, Explode: {inventory.PlayerOneExplodeDiscs}");
+        Console.WriteLine($"Player 2 ({inventory.PlayerTwoName}) → Ordinary: {inventory.PlayerTwoOrdinaryDiscs}, Boring: {inventory.PlayerTwoBoringDiscs}, Magnetic: {inventory.PlayerTwoMagneticDiscs}, Explode: {inventory.PlayerTwoExplodeDiscs}");
         Console.ResetColor();
 
         Console.WriteLine();

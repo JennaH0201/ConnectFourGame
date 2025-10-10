@@ -77,6 +77,11 @@ namespace ConnectFour
                 symbol = 'm';
                 type = "magnetic";
             }
+            else if (inventory.IsDiscAvailable(2, 'e'))
+            {
+                symbol = 'e';
+                type = "explode";
+            }
             else
             {
                 throw new InvalidOperationException("No discs available for Player 2.");
