@@ -181,8 +181,31 @@ namespace ConnectFour
                     }
                     else
                     {
-                        Console.Write("Enter move (e.g. o3, M4 or b7): ");
-                        string input = Console.ReadLine();
+                        Console.Write("Enter move (e.g. o3, M4 or b7) or type 'help': ");
+
+                        string input = Console.ReadLine().Trim().ToLower();
+
+                        // show help menu
+                        if (input == "help")
+                        {
+                            ShowHelp(gameInventory);
+                            continue;
+                        }
+
+                        // go back to main menu
+                        if (input == "menu")
+                        {
+                            break;
+                        }
+
+                        // quit game
+                        if (input == "quit")
+                        {
+                            Console.WriteLine("Exiting the game...");
+                            Environment.Exit(0);     // immediately close the program
+                        }
+
+                        //string input = Console.ReadLine();
                         (disc, column) = InputValidation.ParseInput(input, gameInventory.moveCounter, gameInventory, gameInventory.Columns);
                     }
 
@@ -241,8 +264,21 @@ namespace ConnectFour
                 }
             }
 
-            Console.WriteLine("Press any key to return to the main menu...");
+            Console.WriteLine("\nPress any key to return to the main menu...");
             Console.ReadKey();
+        }
+
+        // HELP MENU
+        private static void ShowHelp(GameInventory gameInventory)
+        {
+            Console.WriteLine("\nAvailable commands:");
+            Console.WriteLine($"  o1-{gameInventory.Columns} : Drop ordinary disc");
+            Console.WriteLine($"  b1-{gameInventory.Columns} : Drop Boring disc (clears column)");
+            Console.WriteLine($"  m1-{gameInventory.Columns} : Drop Magnetic disc (lifts nearest disc belonging to he player up 1 position and converts to ordinary if lifted)");
+            Console.WriteLine($"  e1-{gameInventory.Columns} : Drop Exploding disc (destroys surrounding discs and self)");
+            Console.WriteLine("  save : auto-save is ON");
+            Console.WriteLine("  menu : Return to main menu");
+            Console.WriteLine("  quit : Exit game\n");
         }
 
     }
