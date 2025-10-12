@@ -216,8 +216,8 @@ namespace ConnectFour
                         if (grid.CheckWin(dropRow, column))
                         {
                             Console.ForegroundColor = ConsoleColor.Magenta;
-                            string winner = player == 1 ? gameInventory.PlayerOneName : gameInventory.PlayerTwoName;
-                            Console.WriteLine($"****{winner} wins the game!****");
+                            string winner = player == 1 ? "Player 1" : "Player 2";
+                            Console.WriteLine($"**** {winner} wins the game! ****");
                             Console.ResetColor();
                             break;
                         }
