@@ -29,7 +29,7 @@ namespace ConnectFour
                 Console.WriteLine("4. Test Mode");
                 Console.WriteLine("5. Exit");
 
-                int mode = InputValidation.GetValidatedInteger("Enter your choice (1-5): ", 1, 5);
+                int mode = InputValidation.GetValidatedInteger("\nEnter your choice (1-5): ", 1, 5);
 
                 if (mode == 5)
                 {
@@ -108,7 +108,7 @@ namespace ConnectFour
                         Console.WriteLine("1. LineUp Classic");
                         Console.WriteLine("2. LineUp Basic");
                         Console.WriteLine("3. LineUp Spin (Grid rotates every 5 turns)");
-                        int variant = InputValidation.GetValidatedInteger("Enter your choice (1-3): ", 1, 3);
+                        int variant = InputValidation.GetValidatedInteger("\nEnter your choice (1-3): ", 1, 3);
 
                         gameInventory.GameVariant = variant switch
                         {
@@ -137,6 +137,8 @@ namespace ConnectFour
             if (restoredGrid == null)
             {
                 // New game setup
+                Console.WriteLine("\nYou can select from 4 to 10 rows");
+                Console.WriteLine("Columns will be automatically set based on rows\n");
                 gameInventory.Rows = InputValidation.GetValidatedInteger("Enter number of rows: ", 4, 10);
                 gameInventory.Columns = InputValidation.ComputeColumnsFromRows(gameInventory.Rows);
                 gameInventory.PlayerOneName = "@";
