@@ -67,9 +67,9 @@ namespace ConnectFour
                 symbol = '#';
                 type = "ordinary";
             }
-            else if (inventory.IsDiscAvailable(2, 'b'))
+            else if (inventory.IsDiscAvailable(2, 'B'))
             {
-                symbol = 'b';
+                symbol = 'B';
                 type = "boring";
             }
             else if (inventory.IsDiscAvailable(2, 'm'))

@@ -40,8 +40,8 @@ namespace ConnectFour
             {
                 '@' => PlayerOneOrdinaryDiscs > 0,
                 '#' => PlayerTwoOrdinaryDiscs > 0,
-                'B' => PlayerOneBoringDiscs > 0,
-                'b' => PlayerTwoBoringDiscs > 0,
+                'b' => PlayerOneBoringDiscs > 0,
+                'B' => PlayerTwoBoringDiscs > 0,
                 'M' => PlayerOneMagneticDiscs > 0,
                 'm' => PlayerTwoMagneticDiscs > 0,
                 'E' => PlayerOneExplodeDiscs > 0,

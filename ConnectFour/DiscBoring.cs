@@ -12,17 +12,19 @@ namespace ConnectFour
 
         public override void ApplyEffect(Disc[,] grid, int row, int col, GameInventory inventory)
         {
-            // Remove all discs below
-            for (int r = row + 1; r < grid.GetLength(0); r++)
+            // Bore through: Remove all existing discs from the column (above and below)
+            for (int r = 0; r < grid.GetLength(0); r++)
             {
-                Disc discBelow = grid[r, col];
-                if (discBelow != null)
+                if (r == row) continue; // Skip the boring disc itself
+
+                Disc disc = grid[r, col];
+                if (disc != null)
                 {
-                    string type = Disc.GetDiscTypeFromSymbol(discBelow.Symbol);
-                    int player = discBelow.Symbol switch
+                    string type = Disc.GetDiscTypeFromSymbol(disc.Symbol);
+                    int player = disc.Symbol switch
                     {
-                        '@' or 'B' or 'M' => 1,
-                        '#' or 'b' or 'm' => 2,
+                        '@' or 'b' or 'M' or 'E' => 1,
+                        '#' or 'B' or 'm' or 'e' => 2,
                         _ => 0
                     };
 
@@ -31,16 +33,11 @@ namespace ConnectFour
                 }
             }
 
-            //Remove the boring disc from its original position
+            // Remove the boring disc from its current position
             grid[row, col] = null;
 
-            //Drop the boring disc to the bottom of the column
-            int bottomRow = grid.GetLength(0) - 1;
-            while (bottomRow >= 0 && grid[bottomRow, col] != null)
-                bottomRow--;
-
-            if (bottomRow >= 0)
-                grid[bottomRow, col] = new DiscOrdinary(Symbol == 'b' ? '#' : '@');
+            // Place the boring disc at the bottom (row 0), keeping its symbol
+            grid[0, col] = this;
         }
 
 

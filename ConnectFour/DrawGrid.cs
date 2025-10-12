@@ -68,14 +68,15 @@ public class DrawGrid
 
     public void DisplayGrid(int moveCounter)
     {
-        Console.Clear();
         Console.WriteLine();
+        Console.WriteLine("═══════════════════════════════════════════════════════════════");
 
         string currentPlayer = moveCounter % 2 != 0 ? "Player 1" : "Player 2";
         string symbol = currentPlayer == "Player 1" ? inventory.PlayerOneName : inventory.PlayerTwoName;
+        int playerNum = moveCounter % 2 != 0 ? 1 : 2;
 
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"Move #{moveCounter} — {currentPlayer}'s turn ({symbol})");
+        Console.ForegroundColor = playerNum == 1 ? ConsoleColor.Yellow : ConsoleColor.Cyan;
+        Console.WriteLine($"MOVE #{moveCounter} >>> {currentPlayer.ToUpper()}'S TURN (Symbol: {symbol})");
         Console.ResetColor();
         Console.WriteLine();
 

@@ -174,7 +174,9 @@ namespace ConnectFour
                     {
                         PlayerComputer computer = new PlayerComputer();
                         (disc, column) = computer.MakeMove(grid, gameInventory);
-                        Console.WriteLine($"Computer plays: {disc.Symbol}{column + 1}");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine($"[COMPUTER] Played {GetDiscTypeName(disc.Symbol)} disc '{disc.Symbol}' in column {column + 1}");
+                        Console.ResetColor();
                         await Task.Delay(1000);
                     }
                     else
@@ -188,8 +190,14 @@ namespace ConnectFour
 
                     if (dropRow != -1)
                     {
-                        grid.Grid[dropRow, column] = disc;
-                        disc.ApplyEffect(grid.Grid, dropRow, column, gameInventory);
+                        // Show what move was just made
+                        if (gameInventory.GameMode != "Human vs Computer" || player == 1)
+                        {
+                            Console.ForegroundColor = player == 1 ? ConsoleColor.Yellow : ConsoleColor.Cyan;
+                            Console.WriteLine($"[PLAYER {player}] Played {GetDiscTypeName(disc.Symbol)} disc '{disc.Symbol}' in column {column + 1}");
+                            Console.ResetColor();
+                        }
+
                         gameInventory.moveCounter++;
 
                         // Check if rotation should occur (every 5th turn for LineUp Spin)
@@ -241,6 +249,18 @@ namespace ConnectFour
 
             Console.WriteLine("Press any key to return to the main menu...");
             Console.ReadKey();
+        }
+
+        static string GetDiscTypeName(char symbol)
+        {
+            return symbol switch
+            {
+                '@' or '#' => "Ordinary",
+                'b' or 'B' => "Boring",
+                'M' or 'm' => "Magnetic",
+                'E' or 'e' => "Exploding",
+                _ => "Unknown"
+            };
         }
 
     }
