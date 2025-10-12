@@ -60,7 +60,6 @@ public class DrawGrid
         inventory.UseDisc(inventory.moveCounter, discType);
 
         //Applying effects for Magnetic, Exploding and Boring Discs. implements in their respective classes using polymorfism
-        Grid[dropRow, column] = disc;
         disc.ApplyEffect(Grid, dropRow, column, inventory);
 
         return dropRow; // Success: retur the row where the disc was placedd
