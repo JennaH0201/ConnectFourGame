@@ -126,7 +126,7 @@ namespace ConnectFour
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
 
-            Console.WriteLine("Game Summary:");
+            Console.WriteLine("\nGame Summary:");
             Console.WriteLine($"Mode: {GameMode}");
             Console.WriteLine($"Variant: {GameVariant}");
             Console.WriteLine($"Grid Size: {Rows} rows × {Columns} columns");
@@ -135,7 +135,9 @@ namespace ConnectFour
             Console.WriteLine();
 
             Console.ResetColor();
-            Thread.Sleep(1500); // Pause
+
+            Console.WriteLine("Press any key to start game...\n");
+            Console.ReadKey();
         }
 
         public void DisplayDiscSummary()

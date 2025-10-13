@@ -29,7 +29,7 @@ namespace ConnectFour
                 Console.WriteLine("4. Test Mode");
                 Console.WriteLine("5. Exit");
 
-                int mode = InputValidation.GetValidatedInteger("Enter your choice (1-5): ", 1, 5);
+                int mode = InputValidation.GetValidatedInteger("\nEnter your choice (1-5): ", 1, 5);
 
                 if (mode == 5)
                 {
@@ -108,7 +108,7 @@ namespace ConnectFour
                         Console.WriteLine("1. LineUp Classic");
                         Console.WriteLine("2. LineUp Basic");
                         Console.WriteLine("3. LineUp Spin (Grid rotates every 5 turns)");
-                        int variant = InputValidation.GetValidatedInteger("Enter your choice (1-3): ", 1, 3);
+                        int variant = InputValidation.GetValidatedInteger("\nEnter your choice (1-3): ", 1, 3);
 
                         gameInventory.GameVariant = variant switch
                         {
@@ -137,6 +137,8 @@ namespace ConnectFour
             if (restoredGrid == null)
             {
                 // New game setup
+                Console.WriteLine("\nYou can select from 4 to 10 rows");
+                Console.WriteLine("Columns will be automatically set based on rows\n");
                 gameInventory.Rows = InputValidation.GetValidatedInteger("Enter number of rows: ", 4, 10);
                 gameInventory.Columns = InputValidation.ComputeColumnsFromRows(gameInventory.Rows);
                 gameInventory.PlayerOneName = "@";
@@ -144,7 +146,7 @@ namespace ConnectFour
 
                 gameInventory.InitializeDiscInventory(); // Only for new games -  to solve disc count errors during restoration
                 gameInventory.DisplaySummary();
-                gameInventory.DisplayDiscSummary();
+                //gameInventory.DisplayDiscSummary();
 
                 grid = new DrawGrid(gameInventory.Rows, gameInventory.Columns, gameInventory);
                 gameInventory.moveCounter = 1;
@@ -181,8 +183,31 @@ namespace ConnectFour
                     }
                     else
                     {
-                        Console.Write("Enter move (e.g. o3, M4 or b7): ");
-                        string input = Console.ReadLine();
+                        Console.Write("Enter move (e.g. o3, M4 or b7) or type 'help': ");
+
+                        string input = Console.ReadLine().Trim().ToLower();
+
+                        // show help menu
+                        if (input == "help")
+                        {
+                            ShowHelpClassic(gameInventory);
+                            continue;
+                        }
+
+                        // go back to main menu
+                        if (input == "menu")
+                        {
+                            break;
+                        }
+
+                        // quit game
+                        if (input == "quit")
+                        {
+                            Console.WriteLine("Exiting the game...");
+                            Environment.Exit(0);     // immediately close the program
+                        }
+
+                        //string input = Console.ReadLine();
                         (disc, column) = InputValidation.ParseInput(input, gameInventory.moveCounter, gameInventory, gameInventory.Columns);
                     }
 
@@ -222,8 +247,8 @@ namespace ConnectFour
                         if (grid.CheckWin(dropRow, column))
                         {
                             Console.ForegroundColor = ConsoleColor.Magenta;
-                            string winner = player == 1 ? gameInventory.PlayerOneName : gameInventory.PlayerTwoName;
-                            Console.WriteLine($"****{winner} wins the game!****");
+                            string winner = player == 1 ? "Player 1" : "Player 2";
+                            Console.WriteLine($"**** {winner} wins the game! ****");
                             Console.ResetColor();
                             break;
                         }
@@ -247,10 +272,9 @@ namespace ConnectFour
                 }
             }
 
-            Console.WriteLine("Press any key to return to the main menu...");
+            Console.WriteLine("\nPress any key to return to the main menu...");
             Console.ReadKey();
         }
-
         static string GetDiscTypeName(char symbol)
         {
             return symbol switch
@@ -263,5 +287,42 @@ namespace ConnectFour
             };
         }
 
+        // HELP MENU
+        // basic mode
+        private static void ShowHelpBasic(GameInventory gameInventory)
+        {
+            Console.WriteLine("\nAvailable commands:");
+            Console.WriteLine($"  o1-{gameInventory.Columns} : Drop ordinary disc");
+            Console.WriteLine("  save : auto-save is ON");
+            Console.WriteLine("  menu : Return to main menu");
+            Console.WriteLine("  quit : Exit game\n");
+        }
+
+        // classic mode
+        private static void ShowHelpClassic(GameInventory gameInventory)
+        {
+            Console.WriteLine("\nAvailable commands:");
+            Console.WriteLine($"  o1-{gameInventory.Columns} : Drop ordinary disc");
+            Console.WriteLine($"  b1-{gameInventory.Columns} : Drop Boring disc (clears column)");
+            Console.WriteLine($"  m1-{gameInventory.Columns} : Drop Magnetic disc (lifts nearest disc belonging to he player up 1 position and converts to ordinary if lifted)");
+            Console.WriteLine($"  e1-{gameInventory.Columns} : Drop Exploding disc (destroys surrounding discs and self)");
+            Console.WriteLine("  save : auto-save is ON");
+            Console.WriteLine("  menu : Return to main menu");
+            Console.WriteLine("  quit : Exit game\n");
+        }
+
+        // spin mode
+        private static void ShowHelpSpin(GameInventory gameInventory)
+        {
+            Console.WriteLine("  In spin mode, the grid will rotate 90 degrees clockwise every 5 turns\n");
+            Console.WriteLine("\nAvailable commands:");
+            Console.WriteLine($"  o1-{gameInventory.Columns} : Drop ordinary disc");
+            Console.WriteLine($"  b1-{gameInventory.Columns} : Drop Boring disc (clears column)");
+            Console.WriteLine($"  m1-{gameInventory.Columns} : Drop Magnetic disc (lifts nearest disc belonging to he player up 1 position and converts to ordinary if lifted)");
+            Console.WriteLine($"  e1-{gameInventory.Columns} : Drop Exploding disc (destroys surrounding discs and self)");
+            Console.WriteLine("  save : auto-save is ON");
+            Console.WriteLine("  menu : Return to main menu");
+            Console.WriteLine("  quit : Exit game\n");
+        }
     }
 }
