@@ -110,8 +110,20 @@ public class DrawGrid
 
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("Disc Inventory:");
-        Console.WriteLine($"Player 1 ({inventory.PlayerOneName}) → Ordinary: {inventory.PlayerOneOrdinaryDiscs}, Boring: {inventory.PlayerOneBoringDiscs}, Magnetic: {inventory.PlayerOneMagneticDiscs}, Explode: {inventory.PlayerOneExplodeDiscs}");
-        Console.WriteLine($"Player 2 ({inventory.PlayerTwoName}) → Ordinary: {inventory.PlayerTwoOrdinaryDiscs}, Boring: {inventory.PlayerTwoBoringDiscs}, Magnetic: {inventory.PlayerTwoMagneticDiscs}, Explode: {inventory.PlayerTwoExplodeDiscs}");
+
+        if (inventory.GameVariant == "LineUp Basic")
+        {
+            // LineUp Basic: Only show ordinary discs
+            Console.WriteLine($"Player 1 ({inventory.PlayerOneName}) → Ordinary: {inventory.PlayerOneOrdinaryDiscs}");
+            Console.WriteLine($"Player 2 ({inventory.PlayerTwoName}) → Ordinary: {inventory.PlayerTwoOrdinaryDiscs}");
+        }
+        else
+        {
+            // LineUp Classic and Spin: Show all disc types
+            Console.WriteLine($"Player 1 ({inventory.PlayerOneName}) → Ordinary: {inventory.PlayerOneOrdinaryDiscs}, Boring: {inventory.PlayerOneBoringDiscs}, Magnetic: {inventory.PlayerOneMagneticDiscs}, Explode: {inventory.PlayerOneExplodeDiscs}");
+            Console.WriteLine($"Player 2 ({inventory.PlayerTwoName}) → Ordinary: {inventory.PlayerTwoOrdinaryDiscs}, Boring: {inventory.PlayerTwoBoringDiscs}, Magnetic: {inventory.PlayerTwoMagneticDiscs}, Explode: {inventory.PlayerTwoExplodeDiscs}");
+        }
+
         Console.ResetColor();
 
         Console.WriteLine();
@@ -310,8 +322,20 @@ public class DrawGrid
 
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("Disc Inventory:");
-        Console.WriteLine($"Player 1 ({inventory.PlayerOneName}) → Ordinary: {inventory.PlayerOneOrdinaryDiscs}, Boring: {inventory.PlayerOneBoringDiscs}, Magnetic: {inventory.PlayerOneMagneticDiscs}");
-        Console.WriteLine($"Player 2 ({inventory.PlayerTwoName}) → Ordinary: {inventory.PlayerTwoOrdinaryDiscs}, Boring: {inventory.PlayerTwoBoringDiscs}, Magnetic: {inventory.PlayerTwoMagneticDiscs}");
+
+        if (inventory.GameVariant == "LineUp Basic")
+        {
+            // LineUp Basic: Only show ordinary discs
+            Console.WriteLine($"Player 1 ({inventory.PlayerOneName}) → Ordinary: {inventory.PlayerOneOrdinaryDiscs}");
+            Console.WriteLine($"Player 2 ({inventory.PlayerTwoName}) → Ordinary: {inventory.PlayerTwoOrdinaryDiscs}");
+        }
+        else
+        {
+            // LineUp Classic and Spin: Show all disc types
+            Console.WriteLine($"Player 1 ({inventory.PlayerOneName}) → Ordinary: {inventory.PlayerOneOrdinaryDiscs}, Boring: {inventory.PlayerOneBoringDiscs}, Magnetic: {inventory.PlayerOneMagneticDiscs}, Explode: {inventory.PlayerOneExplodeDiscs}");
+            Console.WriteLine($"Player 2 ({inventory.PlayerTwoName}) → Ordinary: {inventory.PlayerTwoOrdinaryDiscs}, Boring: {inventory.PlayerTwoBoringDiscs}, Magnetic: {inventory.PlayerTwoMagneticDiscs}, Explode: {inventory.PlayerTwoExplodeDiscs}");
+        }
+
         Console.ResetColor();
 
         Console.WriteLine();
