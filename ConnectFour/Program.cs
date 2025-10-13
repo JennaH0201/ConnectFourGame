@@ -20,6 +20,26 @@ namespace ConnectFour
                 Console.WriteLine("Student: Philip, Jaeeun, Jennifer, and Hamza");
                 Console.WriteLine("==============================================");
 
+
+                Console.WriteLine("Select the game mode!");
+                Console.WriteLine("1. LineUp Classic: Having fun with all discs!");
+                Console.WriteLine("2. LineUp Basic: Play the very basic mode");
+                Console.WriteLine("3. LineUp Spin: Play upgraded version of basic game.");
+                Console.WriteLine();
+                int variantChoice = InputValidation.GetValidatedInteger("Enter your choice (1-3): ", 1, 3);
+                Console.WriteLine();
+                Console.Clear();
+                
+                string selectedVariant = variantChoice switch
+                {
+                    1 => "LineUp Classic",
+                    2 => "LineUp Basic",
+                    3 => "LineUp Spin",
+                    _ => "LineUp Classic"
+                };
+                Console.WriteLine($"Selected Variant: {selectedVariant}");
+                Console.WriteLine();
+
                 Console.WriteLine(Environment.NewLine);
 
                 Console.WriteLine("Select Game Mode:");
