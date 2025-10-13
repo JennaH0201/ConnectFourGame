@@ -190,7 +190,7 @@ namespace ConnectFour
                         // show help menu
                         if (input == "help")
                         {
-                            ShowHelp(gameInventory);
+                            ShowHelpClassic(gameInventory);
                             continue;
                         }
 
@@ -288,8 +288,33 @@ namespace ConnectFour
         }
 
         // HELP MENU
-        private static void ShowHelp(GameInventory gameInventory)
+        // basic mode
+        private static void ShowHelpBasic(GameInventory gameInventory)
         {
+            Console.WriteLine("\nAvailable commands:");
+            Console.WriteLine($"  o1-{gameInventory.Columns} : Drop ordinary disc");
+            Console.WriteLine("  save : auto-save is ON");
+            Console.WriteLine("  menu : Return to main menu");
+            Console.WriteLine("  quit : Exit game\n");
+        }
+
+        // classic mode
+        private static void ShowHelpClassic(GameInventory gameInventory)
+        {
+            Console.WriteLine("\nAvailable commands:");
+            Console.WriteLine($"  o1-{gameInventory.Columns} : Drop ordinary disc");
+            Console.WriteLine($"  b1-{gameInventory.Columns} : Drop Boring disc (clears column)");
+            Console.WriteLine($"  m1-{gameInventory.Columns} : Drop Magnetic disc (lifts nearest disc belonging to he player up 1 position and converts to ordinary if lifted)");
+            Console.WriteLine($"  e1-{gameInventory.Columns} : Drop Exploding disc (destroys surrounding discs and self)");
+            Console.WriteLine("  save : auto-save is ON");
+            Console.WriteLine("  menu : Return to main menu");
+            Console.WriteLine("  quit : Exit game\n");
+        }
+
+        // spin mode
+        private static void ShowHelpSpin(GameInventory gameInventory)
+        {
+            Console.WriteLine("  In spin mode, the grid will rotate 90 degrees clockwise every 5 turns\n");
             Console.WriteLine("\nAvailable commands:");
             Console.WriteLine($"  o1-{gameInventory.Columns} : Drop ordinary disc");
             Console.WriteLine($"  b1-{gameInventory.Columns} : Drop Boring disc (clears column)");
