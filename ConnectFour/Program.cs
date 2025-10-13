@@ -14,14 +14,15 @@ namespace ConnectFour
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("===============================================");
+                Console.WriteLine("=================================================");
                 Console.WriteLine("Welcome to ConnectFour!");
                 Console.WriteLine("Developed by team 18 for IFN584");
                 Console.WriteLine("Student: Philip, Jaeeun, Jennifer, and Hamza");
-                Console.WriteLine("==============================================");
+                Console.WriteLine("================================================");
 
 
                 Console.WriteLine("Select the game mode!");
+                Console.WriteLine();
                 Console.WriteLine("1. LineUp Classic: Having fun with all discs!");
                 Console.WriteLine("2. LineUp Basic: Play the very basic mode");
                 Console.WriteLine("3. LineUp Spin: Play upgraded version of basic game.");
