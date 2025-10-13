@@ -136,7 +136,7 @@ namespace ConnectFour
 
             Console.ResetColor();
 
-            Console.WriteLine("Press any key to continue...\n");
+            Console.WriteLine("Press any key to start game...\n");
             Console.ReadKey();
         }
 

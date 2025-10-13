@@ -146,7 +146,7 @@ namespace ConnectFour
 
                 gameInventory.InitializeDiscInventory(); // Only for new games -  to solve disc count errors during restoration
                 gameInventory.DisplaySummary();
-                gameInventory.DisplayDiscSummary();
+                //gameInventory.DisplayDiscSummary();
 
                 grid = new DrawGrid(gameInventory.Rows, gameInventory.Columns, gameInventory);
                 gameInventory.moveCounter = 1;
@@ -275,8 +275,18 @@ namespace ConnectFour
             Console.WriteLine("\nPress any key to return to the main menu...");
             Console.ReadKey();
         }
+        static string GetDiscTypeName(char symbol)
+        {
+            return symbol switch
+            {
+                '@' or '#' => "Ordinary",
+                'b' or 'B' => "Boring",
+                'M' or 'm' => "Magnetic",
+                'E' or 'e' => "Exploding",
+                _ => "Unknown"
+            };
+        }
 
-<<<<<<< HEAD
         // HELP MENU
         private static void ShowHelp(GameInventory gameInventory)
         {
@@ -288,19 +298,6 @@ namespace ConnectFour
             Console.WriteLine("  save : auto-save is ON");
             Console.WriteLine("  menu : Return to main menu");
             Console.WriteLine("  quit : Exit game\n");
-=======
-        static string GetDiscTypeName(char symbol)
-        {
-            return symbol switch
-            {
-                '@' or '#' => "Ordinary",
-                'b' or 'B' => "Boring",
-                'M' or 'm' => "Magnetic",
-                'E' or 'e' => "Exploding",
-                _ => "Unknown"
-            };
->>>>>>> a1cde04c7e5770c0d0e4a37fe5e395e6ef8c6d7b
         }
-
     }
 }
