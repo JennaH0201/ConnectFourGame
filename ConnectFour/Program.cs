@@ -314,7 +314,7 @@ namespace ConnectFour
         // spin mode
         private static void ShowHelpSpin(GameInventory gameInventory)
         {
-            Console.WriteLine("  In spin mode, the grid will rotate 90 degrees clockwise every 5 turns\n");
+            Console.WriteLine("\nIn spin mode, the grid will rotate 90 degrees clockwise every 5 turns");
             Console.WriteLine("\nAvailable commands:");
             Console.WriteLine($"  o1-{gameInventory.Columns} : Drop ordinary disc");
             Console.WriteLine($"  b1-{gameInventory.Columns} : Drop Boring disc (clears column)");
