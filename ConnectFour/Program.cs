@@ -123,21 +123,8 @@ namespace ConnectFour
                     }
                     else
                     {
-                        // Select game variant for new games
-                        Console.WriteLine(Environment.NewLine);
-                        Console.WriteLine("Select Game Variant:");
-                        Console.WriteLine("1. LineUp Classic");
-                        Console.WriteLine("2. LineUp Basic");
-                        Console.WriteLine("3. LineUp Spin (Grid rotates every 5 turns)");
-                        int variant = InputValidation.GetValidatedInteger("\nEnter your choice (1-3): ", 1, 3);
-
-                        gameInventory.GameVariant = variant switch
-                        {
-                            1 => "LineUp Classic",
-                            2 => "LineUp Basic",
-                            3 => "LineUp Spin",
-                            _ => "LineUp Basic"
-                        };
+                        // Use the variant that was already selected at the beginning
+                        gameInventory.GameVariant = selectedVariant;
 
                         await RunGameLoop(gameInventory);
                     }
