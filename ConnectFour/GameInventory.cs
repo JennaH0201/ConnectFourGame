@@ -55,9 +55,26 @@ namespace ConnectFour
             if (PlayerOneOrdinaryDiscs > 0 || PlayerTwoOrdinaryDiscs > 0)
                 return; // Already initialized or restored
 
-            int ordinary = DiscsPerPlayer - (PlayerOneBoringDiscs + PlayerOneMagneticDiscs);
-            PlayerOneOrdinaryDiscs = ordinary;
-            PlayerTwoOrdinaryDiscs = ordinary;
+            // LineUp Basic: Only ordinary discs
+            if (GameVariant == "LineUp Basic")
+            {
+                PlayerOneBoringDiscs = 0;
+                PlayerOneMagneticDiscs = 0;
+                PlayerOneExplodeDiscs = 0;
+                PlayerTwoBoringDiscs = 0;
+                PlayerTwoMagneticDiscs = 0;
+                PlayerTwoExplodeDiscs = 0;
+
+                PlayerOneOrdinaryDiscs = DiscsPerPlayer;
+                PlayerTwoOrdinaryDiscs = DiscsPerPlayer;
+            }
+            else
+            {
+                // LineUp Classic and Spin: All disc types available
+                int ordinary = DiscsPerPlayer - (PlayerOneBoringDiscs + PlayerOneMagneticDiscs + PlayerOneExplodeDiscs);
+                PlayerOneOrdinaryDiscs = ordinary;
+                PlayerTwoOrdinaryDiscs = ordinary;
+            }
         }
 
         public bool UseDisc(int moveCounter, string type)
@@ -145,8 +162,20 @@ namespace ConnectFour
             Console.ForegroundColor = ConsoleColor.Cyan;
 
             Console.WriteLine($"Each player receives {DiscsPerPlayer} discs:");
-            Console.WriteLine($"Player 1 → Ordinary: {PlayerOneOrdinaryDiscs}, Boring: {PlayerOneBoringDiscs}, Magnetic: {PlayerOneMagneticDiscs}, Magnetic: {PlayerOneExplodeDiscs}");
-            Console.WriteLine($"Player 2 → Ordinary: {PlayerTwoOrdinaryDiscs}, Boring: {PlayerTwoBoringDiscs}, Magnetic: {PlayerTwoMagneticDiscs}, Magnetic: {PlayerTwoExplodeDiscs}");
+
+            if (GameVariant == "LineUp Basic")
+            {
+                // LineUp Basic: Only show ordinary discs
+                Console.WriteLine($"Player 1 → Ordinary: {PlayerOneOrdinaryDiscs}");
+                Console.WriteLine($"Player 2 → Ordinary: {PlayerTwoOrdinaryDiscs}");
+            }
+            else
+            {
+                // LineUp Classic and Spin: Show all disc types
+                Console.WriteLine($"Player 1 → Ordinary: {PlayerOneOrdinaryDiscs}, Boring: {PlayerOneBoringDiscs}, Magnetic: {PlayerOneMagneticDiscs}, Explode: {PlayerOneExplodeDiscs}");
+                Console.WriteLine($"Player 2 → Ordinary: {PlayerTwoOrdinaryDiscs}, Boring: {PlayerTwoBoringDiscs}, Magnetic: {PlayerTwoMagneticDiscs}, Explode: {PlayerTwoExplodeDiscs}");
+            }
+
             Console.WriteLine();
 
             Console.ResetColor();
