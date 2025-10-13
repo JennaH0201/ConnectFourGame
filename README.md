@@ -26,7 +26,7 @@ Welcome to **ConnectFour**, a modular and extensible implementation of the class
 
 | Name            | Student Number | Email                  | Role / Contribution               |
 |-----------------|----------------|------------------------|-----------------------------------|
-| Hamza Ateeq     | *Add ID*       | *Add Email*            | AI logic, disc placement          |
+| Hamza Ateeq     | N12269549      | *Add Email*            | AI logic, disc placement          |
 | Jaeeun Heo      | N1170519       | *Add Email*            | Undo/Redo system, testing         |
 | Jennifer Ngo    | N1046724       | *Add Email*            | Save/Restore, help menu           |
 | Philip Njoroge  | N1217634       | philip.njoroge@qut.edu.au | Grid logic, architecture, Spin |
