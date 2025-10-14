@@ -145,16 +145,20 @@ namespace ConnectFour
             if (restoredGrid == null)
             {
                 // New game setup
-                if (gameInventory.GameVariant == "LineUp Basic")
+                if (gameInventory.GameVariant == "LineUp Basic" || gameInventory.GameVariant == "LineUp Spin")
                 {
-                    // LineUp Basic: Fixed 8x9 grid, only ordinary discs
-                    Console.WriteLine("\nLineUp Basic mode: Grid fixed at 8 rows x 9 columns");
+                    // LineUp Basic and Spin: Fixed 8x9 grid, only ordinary discs
+                    Console.WriteLine($"\n{gameInventory.GameVariant} mode: Grid fixed at 8 rows x 9 columns");
+                    if (gameInventory.GameVariant == "LineUp Spin")
+                    {
+                        Console.WriteLine("Grid will rotate 90° clockwise every 5 turns!");
+                    }
                     gameInventory.Rows = 8;
                     gameInventory.Columns = 9;
                 }
                 else
                 {
-                    // LineUp Classic and Spin: User selects grid size
+                    // LineUp Classic: User selects grid size
                     Console.WriteLine("\nYou can select from 4 to 10 rows");
                     Console.WriteLine("Columns will be automatically set based on rows\n");
                     gameInventory.Rows = InputValidation.GetValidatedInteger("Enter number of rows: ", 4, 10);
