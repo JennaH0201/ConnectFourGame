@@ -55,8 +55,8 @@ namespace ConnectFour
             if (PlayerOneOrdinaryDiscs > 0 || PlayerTwoOrdinaryDiscs > 0)
                 return; // Already initialized or restored
 
-            // LineUp Basic: Only ordinary discs
-            if (GameVariant == "LineUp Basic")
+            // LineUp Basic and Spin: Only ordinary discs
+            if (GameVariant == "LineUp Basic" || GameVariant == "LineUp Spin")
             {
                 PlayerOneBoringDiscs = 0;
                 PlayerOneMagneticDiscs = 0;
@@ -70,7 +70,7 @@ namespace ConnectFour
             }
             else
             {
-                // LineUp Classic and Spin: All disc types available
+                // LineUp Classic: All disc types available
                 int ordinary = DiscsPerPlayer - (PlayerOneBoringDiscs + PlayerOneMagneticDiscs + PlayerOneExplodeDiscs);
                 PlayerOneOrdinaryDiscs = ordinary;
                 PlayerTwoOrdinaryDiscs = ordinary;
@@ -163,15 +163,15 @@ namespace ConnectFour
 
             Console.WriteLine($"Each player receives {DiscsPerPlayer} discs:");
 
-            if (GameVariant == "LineUp Basic")
+            if (GameVariant == "LineUp Basic" || GameVariant == "LineUp Spin")
             {
-                // LineUp Basic: Only show ordinary discs
+                // LineUp Basic and Spin: Only show ordinary discs
                 Console.WriteLine($"Player 1 → Ordinary: {PlayerOneOrdinaryDiscs}");
                 Console.WriteLine($"Player 2 → Ordinary: {PlayerTwoOrdinaryDiscs}");
             }
             else
             {
-                // LineUp Classic and Spin: Show all disc types
+                // LineUp Classic: Show all disc types
                 Console.WriteLine($"Player 1 → Ordinary: {PlayerOneOrdinaryDiscs}, Boring: {PlayerOneBoringDiscs}, Magnetic: {PlayerOneMagneticDiscs}, Explode: {PlayerOneExplodeDiscs}");
                 Console.WriteLine($"Player 2 → Ordinary: {PlayerTwoOrdinaryDiscs}, Boring: {PlayerTwoBoringDiscs}, Magnetic: {PlayerTwoMagneticDiscs}, Explode: {PlayerTwoExplodeDiscs}");
             }
