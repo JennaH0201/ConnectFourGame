@@ -207,7 +207,7 @@ namespace ConnectFour
                     }
                     else
                     {
-                        Console.Write("Enter move (e.g. o3, M4 or b7) or type 'help': ");
+                        Console.Write("Enter move (e.g. o3, M4 or b7)/undo/redo or type 'help': ");
 
                         string input = Console.ReadLine().Trim().ToLower();
 
@@ -229,6 +229,44 @@ namespace ConnectFour
                         {
                             Console.WriteLine("Exiting the game...");
                             Environment.Exit(0);     // immediately close the program
+                        }
+
+                        if (input == "undo")
+                        {
+                            if (grid.UndoMove(gameInventory, player))
+                            {
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine("Move undone!");
+                                Console.ResetColor();
+                                grid.DisplayGrid(gameInventory.moveCounter);
+                                continue;
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Cannot undo - either nothing to undo or this is not your move.");
+                                Console.ResetColor();
+                                continue;
+                            }
+                        }
+
+                        if (input == "redo")
+                        {
+                            if (grid.RedoMove(gameInventory, player))
+                            {
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine("Move redone!");
+                                Console.ResetColor();
+                                grid.DisplayGrid(gameInventory.moveCounter);
+                                continue;
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Cannot redo - no moves to redo.");
+                                Console.ResetColor();
+                                continue;
+                            }
                         }
 
                         //string input = Console.ReadLine();
