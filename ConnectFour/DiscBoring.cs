@@ -23,8 +23,8 @@ namespace ConnectFour
                     string type = Disc.GetDiscTypeFromSymbol(disc.Symbol);
                     int player = disc.Symbol switch
                     {
-                        '@' or 'b' or 'M' or 'E' => 1,
-                        '#' or 'B' or 'm' or 'e' => 2,
+                        '@' or 'B' or 'M' or 'E' => 1,
+                        '#' or 'b' or 'm' or 'e' => 2,
                         _ => 0
                     };
 

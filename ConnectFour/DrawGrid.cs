@@ -91,7 +91,47 @@ public class DrawGrid
 
         inventory.UseDisc(inventory.moveCounter, discType);
 
-        disc.ApplyEffect(Grid, dropRow, column, inventory);
+        // Frame 1: Show initial placement for special discs
+        if (discType != "Ordinary")
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"\n[FRAME 1] Initial placement: {discType} disc lands at Row {dropRow}, Column {column}");
+            Console.ResetColor();
+            DisplayGrid(inventory.moveCounter);
+            Console.WriteLine("\nPress Enter to see the effect...");
+            Console.ReadLine();
+        }
+
+        // For Explode disc: special 3-frame visualization handled inside ApplyEffect
+        if (discType == "Explode")
+        {
+            disc.ApplyEffect(Grid, dropRow, column, inventory);
+
+            // Show frame 2 after explosion
+            DisplayGrid(inventory.moveCounter);
+            Console.WriteLine("\nPress Enter to see gravity applied...");
+            Console.ReadLine();
+
+            // Frame 3 is shown after gravity in ApplyEffect, display final state
+            DisplayGrid(inventory.moveCounter);
+            Console.WriteLine("\nPress Enter to continue...");
+            Console.ReadLine();
+        }
+        else
+        {
+            disc.ApplyEffect(Grid, dropRow, column, inventory);
+
+            // Frame 2: Show effect activation for other special discs
+            if (discType != "Ordinary")
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"\n[FRAME 2] Effect activation: {discType} disc ability triggered!");
+                Console.ResetColor();
+                DisplayGrid(inventory.moveCounter);
+                Console.WriteLine("\nPress Enter to continue...");
+                Console.ReadLine();
+            }
+        }
 
         // Compare grid before and after to track removed cells
         CaptureGridAfterEffect(move, dropRow, column);
@@ -175,8 +215,8 @@ public class DrawGrid
     {
         return symbol switch
         {
-            '@' or 'b' or 'M' or 'E' => 1,
-            '#' or 'B' or 'm' or 'e' => 2,
+            '@' or 'B' or 'M' or 'E' => 1,
+            '#' or 'b' or 'm' or 'e' => 2,
             _ => 0
         };
     }

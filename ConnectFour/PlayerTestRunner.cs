@@ -26,7 +26,7 @@ namespace ConnectFour
                     char symbol = discChar switch
                     {
                         'O' => player == 1 ? '@' : '#',
-                        'B' => player == 1 ? 'b' : 'B',
+                        'B' => player == 1 ? 'B' : 'b',
                         'M' => player == 1 ? 'M' : 'm',
                         'E' => player == 1 ? 'E' : 'e',
                         _ => throw new ArgumentException($"Unknown disc type: {discChar}")

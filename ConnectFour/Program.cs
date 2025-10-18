@@ -159,10 +159,11 @@ namespace ConnectFour
                 else
                 {
                     // LineUp Classic: User selects grid size
-                    Console.WriteLine("\nYou can select from 4 to 10 rows");
-                    Console.WriteLine("Columns will be automatically set based on rows\n");
-                    gameInventory.Rows = InputValidation.GetValidatedInteger("Enter number of rows: ", 4, 10);
-                    gameInventory.Columns = InputValidation.ComputeColumnsFromRows(gameInventory.Rows);
+                    Console.WriteLine("\nYou can select from 6 to 10 rows");
+                    gameInventory.Rows = InputValidation.GetValidatedInteger("Enter number of rows: ", 6, 10);
+
+                    Console.WriteLine($"Columns must be at least {gameInventory.Rows} (cannot be smaller than rows)");
+                    gameInventory.Columns = InputValidation.GetValidatedInteger("Enter number of columns: ", gameInventory.Rows, 15);
                 }
 
                 gameInventory.PlayerOneName = "@";
