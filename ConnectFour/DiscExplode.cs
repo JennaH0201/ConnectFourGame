@@ -16,7 +16,12 @@ namespace ConnectFour
             int[] dr = { -1, -1, -1, 0, 0, 1, 1, 1 };
             int[] dc = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
-            grid[row, col] = null; // Remove the exploding disc itself
+            // Frame 2: Show explosion happening
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"\n[FRAME 2] EXPLOSION! Removing disc and all adjacent discs...");
+            Console.ResetColor();
+
+            grid[row, col] = null;
 
             for (int i = 0; i < dr.Length; i++)
             {
@@ -28,6 +33,11 @@ namespace ConnectFour
                     grid[r, c] = null;
                 }
             }
+
+            // Frame 3: Show final state after gravity applied
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine($"\n[FRAME 3] Applying gravity to affected columns...");
+            Console.ResetColor();
 
             // Reapply gravity to affected columns
             for (int c = col - 1; c <= col + 1; c++)

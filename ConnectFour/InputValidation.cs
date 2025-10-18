@@ -26,7 +26,13 @@ namespace ConnectFour
 
         public static int ComputeColumnsFromRows(int rows)
         {
-            return (int)Math.Round(rows * (7.0 / 6.0));
+            int columns = (int)Math.Round(rows * (7.0 / 6.0));
+
+            // Ensure columns is at least equal to rows
+            if (columns < rows)
+                columns = rows;
+
+            return columns;
         }
 
         public static (Disc disc, int column) ParseInput(string input, int moveCounter, GameInventory inventory, int maxColumns)
@@ -47,8 +53,8 @@ namespace ConnectFour
             {
                 (1, 'o') => '@',
                 (2, 'o') => '#',
-                (1, 'b') => 'b',
-                (2, 'b') => 'B',
+                (1, 'b') => 'B',
+                (2, 'b') => 'b',
                 (1, 'm') => 'M',
                 (2, 'm') => 'm',
                 (1, 'e') => 'E',
