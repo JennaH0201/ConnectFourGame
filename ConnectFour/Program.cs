@@ -208,7 +208,15 @@ namespace ConnectFour
                     }
                     else
                     {
-                        Console.Write("Enter move (e.g. o3, M4 or b7)/undo/redo or type 'help': ");
+                        if (gameInventory.GameVariant == "LineUp Spin")
+                        {
+                            Console.WriteLine("Enter move (e.g. o3) or type 'undo', 'redo' or 'help': ");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter move (e.g. o3, M4 or b7) or type 'undo', 'redo' or 'help': ");
+                        }
+                    
 
                         string input = Console.ReadLine().Trim().ToLower();
 
