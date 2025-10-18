@@ -21,14 +21,14 @@ namespace ConnectFour
                 if (disc != null)
                 {
                     string type = Disc.GetDiscTypeFromSymbol(disc.Symbol);
-                    int player = disc.Symbol switch
+                    int affectedPlayer = disc.Symbol switch
                     {
-                        '@' or 'b' or 'M' or 'E' => 1,
-                        '#' or 'B' or 'm' or 'e' => 2,
+                        '@' or 'B' or 'M' or 'E' => 1,
+                        '#' or 'b' or 'm' or 'e' => 2,
                         _ => 0
                     };
 
-                    inventory.RestoreDisc(player, type);
+                    inventory.RestoreDisc(affectedPlayer, type);
                     grid[r, col] = null;
                 }
             }
@@ -36,8 +36,11 @@ namespace ConnectFour
             // Remove the boring disc from its current position
             grid[row, col] = null;
 
-            // Place the boring disc at the bottom (row 0), keeping its symbol
-            grid[0, col] = this;
+            // Convert to ordinary disc at the bottom
+            int player = inventory.moveCounter % 2 != 0 ? 1 : 2;
+
+            char ordinarySymbol = player == 1 ? '@' : '#';
+            grid[0, col] = new DiscOrdinary(ordinarySymbol);
         }
 
 
