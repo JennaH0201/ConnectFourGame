@@ -242,7 +242,10 @@ namespace ConnectFour
 
                         if (input == "undo")
                         {
-                            if (grid.UndoMove(gameInventory, player))
+                            ICommand undoCommand = new UndoCommand(grid, gameInventory, player);
+                            undoCommand.Execute();
+
+                            if (((UndoCommand)undoCommand).WasSuccessful())
                             {
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                                 Console.WriteLine("Move undone!");
@@ -261,7 +264,10 @@ namespace ConnectFour
 
                         if (input == "redo")
                         {
-                            if (grid.RedoMove(gameInventory, player))
+                            ICommand redoCommand = new RedoCommand(grid, gameInventory, player);
+                            redoCommand.Execute();
+
+                            if (((RedoCommand)redoCommand).WasSuccessful())
                             {
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                                 Console.WriteLine("Move redone!");
@@ -282,7 +288,10 @@ namespace ConnectFour
                         (disc, column) = InputValidation.ParseInput(input, gameInventory.moveCounter, gameInventory, gameInventory.Columns);
                     }
 
-                    int dropRow = grid.PlaceDisc(disc.Symbol, player, column);
+                    ICommand placeCommand = new PlaceDiscCommand(grid, gameInventory, disc.Symbol, player, column);
+                    placeCommand.Execute();
+
+                    int dropRow = ((PlaceDiscCommand)placeCommand).GetPlacedRow();
 
                     if (dropRow != -1)
                     {
