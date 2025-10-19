@@ -27,7 +27,7 @@ Welcome to **ConnectFour**, a modular and extensible implementation of the class
 | Name            | Student Number | Email                  | Role / Contribution               |
 |-----------------|----------------|------------------------|-----------------------------------|
 | Hamza Ateeq     | N12269549      | *Add Email*            | UI, boring disc, magnetic disc, basic mode, spin mode, undo and redo, AI logic |
-| Jaeeun Heo      | N1170519       | *Add Email*            | UI, spin mode, testing |
+| Jaeeun Heo      | N11705191      | *Add Email*            | UI, spin mode, testing |
 | Jennifer Ngo    | N10467246      | jennifer.ngo@qut.edu.au | UI, help menu |
 | Philip Njoroge  | N12176346      | philipnjuru.njoroge@qut.edu.au | readme, magnetic disc, exploding disc, custom grid, undo and redo, architecture |
 
