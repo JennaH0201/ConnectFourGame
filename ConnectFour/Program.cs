@@ -187,6 +187,12 @@ namespace ConnectFour
                 gameInventory.DisplayDiscSummary();
             }
 
+            // Observer pattern - register observers
+            ConsoleLogger logger = new ConsoleLogger();
+            StatisticsTracker stats = new StatisticsTracker();
+            grid.AddObserver(logger);
+            grid.AddObserver(stats);
+
             grid.DisplayGrid(gameInventory.moveCounter);
 
             while (true)
@@ -326,10 +332,12 @@ namespace ConnectFour
 
                         if (grid.CheckWin(dropRow, column))
                         {
+                            grid.NotifyGameWon(player);
                             Console.ForegroundColor = ConsoleColor.Magenta;
                             string winner = player == 1 ? "Player 1" : "Player 2";
                             Console.WriteLine($"**** {winner} wins the game! ****");
                             Console.ResetColor();
+                            stats.DisplayStatistics();
                             break;
                         }
 
@@ -338,6 +346,7 @@ namespace ConnectFour
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.WriteLine("It's a draw! No more moves left.");
                             Console.ResetColor();
+                            stats.DisplayStatistics();
                             break;
                         }
                     }
