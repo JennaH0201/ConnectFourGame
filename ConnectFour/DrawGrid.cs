@@ -13,6 +13,9 @@ public class DrawGrid
     private int currentMoveIndex;
     private List<int> undoneMoves;
 
+    // Observer pattern - list of observers
+    private List<IGameObserver> observers;
+
     public DrawGrid(int rows, int columns, GameInventory gameInventory)
     {
         Rows = rows;
@@ -22,6 +25,58 @@ public class DrawGrid
         moveHistory = new List<Move>();
         currentMoveIndex = -1;
         undoneMoves = new List<int>();
+        observers = new List<IGameObserver>();
+    }
+
+    // Observer pattern methods
+    public void AddObserver(IGameObserver observer)
+    {
+        observers.Add(observer);
+    }
+
+    public void RemoveObserver(IGameObserver observer)
+    {
+        observers.Remove(observer);
+    }
+
+    private void NotifyDiscPlaced(int player, char symbol, int row, int column)
+    {
+        foreach (IGameObserver observer in observers)
+        {
+            observer.OnDiscPlaced(player, symbol, row, column);
+        }
+    }
+
+    private void NotifyMoveUndone(int player)
+    {
+        foreach (IGameObserver observer in observers)
+        {
+            observer.OnMoveUndone(player);
+        }
+    }
+
+    private void NotifyMoveRedone(int player)
+    {
+        foreach (IGameObserver observer in observers)
+        {
+            observer.OnMoveRedone(player);
+        }
+    }
+
+    private void NotifyGridRotated()
+    {
+        foreach (IGameObserver observer in observers)
+        {
+            observer.OnGridRotated();
+        }
+    }
+
+    public void NotifyGameWon(int player)
+    {
+        foreach (IGameObserver observer in observers)
+        {
+            observer.OnGameWon(player);
+        }
     }
 
     //determines how far a disc will fall in a given column — i.e., the lowest available row.
@@ -136,6 +191,9 @@ public class DrawGrid
         // Compare grid before and after to track removed cells
         CaptureGridAfterEffect(move, dropRow, column);
         RecordMove(move);
+
+        // Notify observers that a disc was placed
+        NotifyDiscPlaced(player, symbol, dropRow, column);
 
         return dropRow;
     }
@@ -270,6 +328,10 @@ public class DrawGrid
                 // Return the disc to player's inventory
                 inventory.RestoreDisc(player, move.DiscType);
                 undoneMoves.Add(move.MoveNumber);
+
+                // Notify observers that a move was undone
+                NotifyMoveUndone(player);
+
                 return true;
             }
         }
@@ -294,6 +356,10 @@ public class DrawGrid
                 disc.ApplyEffect(Grid, move.Row, move.Column, inventory);
 
                 undoneMoves.Remove(moveNum);
+
+                // Notify observers that a move was redone
+                NotifyMoveRedone(player);
+
                 return true;
             }
         }
@@ -510,6 +576,9 @@ public class DrawGrid
 
         RotateGridClockwise();
         ApplyGravity();
+
+        // Notify observers that grid was rotated
+        NotifyGridRotated();
 
         Console.ForegroundColor = ConsoleColor.Green;
         
