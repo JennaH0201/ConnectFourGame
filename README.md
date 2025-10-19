@@ -41,10 +41,8 @@ This project applies several object-oriented design patterns to improve modulari
 |--------------------|-------------------------------------------|--------|-----------------------------------------------------------------------------|
 | Template Method     | `GameBase.cs` – `PlayGame()` method       | ✅     | Base class defines game loop; subclasses override game-specific steps       |
 | Factory Method      | `DiscFactory.cs` – `CreateDiscFromSymbol()` | ✅     | Returns correct disc type (Ordinary, Boring, Magnetic) based on symbol      |
-| Strategy            | `IMoveStrategy.cs` – interface definition<br>`RandomStrategy.cs`, `WinningMoveStrategy.cs` | ✅     | AI player uses strategy interface to choose moves                           |
 | Command             | `ICommand.cs` – interface<br>`PlaceDiscCommand.cs`, `UndoCommand.cs`, `RedoCommand.cs` | ✅     | Each move is stored as a command; supports undo/redo stack                  |
-| Composite           | `Grid.cs` and `Cell.cs` – grid composed of cells | ❌     | Intended to treat grid and cells uniformly via shared interface             |
-| Observer            | `IGameObserver.cs`, `ConsoleLogger.cs`    | ❌     | Intended to notify observers on game state changes                          |
+| Observer            | `IGameObserver.cs`, `ConsoleLogger.cs`    | ✅     | Intended to notify observers on game state changes                          |
 
 
 ---
@@ -52,17 +50,17 @@ This project applies several object-oriented design patterns to improve modulari
 
 | Requirement                 | Status| Notes                                                    |
 |-----------------------------|---------|----------------------------------------------------------|
-| Human vs Human mode         | ❌  | Validates moves and handles turn logic                |
-| Human vs Computer mode      | ❌  | AI checks for winning move; else selects random move  |
-| LineUp Classic              | ❌  | Includes all disc types and win logic                 |
-| LineUp Basic                | ❌  | Ordinary discs only; fixed grid size                  |
-| LineUp Spin                 | ❌  | Grid rotates every 5 turns; gravity reapplied         |
-| Save and Restore            | ❌  | Game state saved to file and resumed accurately       |
-| Undo and Redo               | ❌  | Full move history tracked; redo available after undo  |
-| Help Menu                   | ❌  | Displays available commands and examples              |
-| Modular Class Design        | ❌  | Follows OOP principles and design patterns            |
-| Console Interface (.NET 8)  | ❌  | Text-based interface using ASCII/Unicode              |
-| Design Patterns Applied     | ❌   | Template Method, Factory Method, Strategy, Command    |
+| Human vs Human mode         | ✅  | Validates moves and handles turn logic                |
+| Human vs Computer mode      | ✅  | AI checks for winning move; else selects random move  |
+| LineUp Classic              | ✅  | Includes all disc types and win logic                 |
+| LineUp Basic                | ✅  | Ordinary discs only; fixed grid size                  |
+| LineUp Spin                 | ✅  | Grid rotates every 5 turns; gravity reapplied         |
+| Save and Restore            | ✅  | Game state saved to file and resumed accurately       |
+| Undo and Redo               | ✅  | Full move history tracked; redo available after undo  |
+| Help Menu                   | ✅  | Displays available commands and examples              |
+| Modular Class Design        | ✅  | Follows OOP principles and design patterns            |
+| Console Interface (.NET 8)  | ✅  | Text-based interface using ASCII/Unicode              |
+| Design Patterns Applied     | ✅   | Template Method, Factory Method, Observer, Command    |
 
 ---
 
