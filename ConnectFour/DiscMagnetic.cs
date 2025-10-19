@@ -17,38 +17,45 @@ namespace ConnectFour
             int player = Symbol == 'M' ? 1 : 2;
             char ordinarySymbol = player == 1 ? '@' : '#';
 
-            // Find the nearest same-player ordinary disc below
-            int foundRow = -1;
-
-
-            for (int r = row + 1; r < grid.GetLength(0); r++)
+            // Find the nearest ordinary disc of the same player (search upward from magnetic disc)
+            int samePlayerRow = -1;
+            for (int r = row - 1; r >= 0; r--)
             {
                 Disc target = grid[r, col];
                 if (target != null && target.Symbol == ordinarySymbol)
                 {
-                    foundRow = r;
+                    samePlayerRow = r;
                     break;
                 }
             }
 
-
-            // If found and not immediately below, swap it up by one position
-            if (foundRow != -1 && foundRow > row)
+            // Pull the player's disc up one position toward the magnetic disc
+            if (samePlayerRow != -1)
             {
-                int liftTo = foundRow - 1;
-
-                // Only lift if the space above is empty
-                if (grid[liftTo, col] == null)
+                int targetRow = samePlayerRow + 1;
+                if (targetRow < grid.GetLength(0))
                 {
-                    grid[liftTo, col] = grid[foundRow, col];
-                    grid[foundRow, col] = null;
+                    // Save what's in the target position
+                    Disc discInTarget = grid[targetRow, col];
+
+                    // Move the player's disc up
+                    Disc samePlayerDisc = grid[samePlayerRow, col];
+                    grid[targetRow, col] = samePlayerDisc;
+
+                    // If there was a disc in the target position, push it down (swap)
+                    if (discInTarget != null)
+                    {
+                        grid[samePlayerRow, col] = discInTarget;
+                    }
+                    else
+                    {
+                        grid[samePlayerRow, col] = null;
+                    }
                 }
             }
-            // If found and immediately below, do nothing
 
             // Convert the magnetic disc to an ordinary disc at its original position
             grid[row, col] = new DiscOrdinary(ordinarySymbol);
-
         }
 
     }
